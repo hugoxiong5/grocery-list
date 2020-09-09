@@ -1,14 +1,8 @@
-"use strict";
+import React from "react";
+import ReactDOM from "react-dom";
+import $ from "jquery";
 
-const ListItem = (props) => <li>{props.item}</li>;
-
-const List = (props) => (
-  <ul>
-    {props.list.map((item, index) => {
-      return <ListItem key={index} item={item.item} />;
-    })}
-  </ul>
-);
+import List from "./components/list.js";
 
 class App extends React.Component {
   constructor(props) {
@@ -89,11 +83,3 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById("app"));
-
-// _handleChange(event) {
-//   this.setState({
-//     [event.target.name]: event.target.value
-//   }, () => {
-//     this._getTotal(this.state.unitPrice, this.state.quantity);
-//   });
-// }
