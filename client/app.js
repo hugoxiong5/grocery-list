@@ -15,6 +15,10 @@ class App extends React.Component {
     this._handleSubmit = this._handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    this._retrieve();
+  }
+
   _handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
