@@ -5,7 +5,7 @@ const ListItem = (props) => <li>{props.item}</li>;
 const List = (props) => (
   <ul>
     {props.list.map((item, index) => {
-      return <ListItem key={index} item={item} />;
+      return <ListItem key={index} item={item.item} />;
     })}
   </ul>
 );
@@ -43,9 +43,25 @@ class App extends React.Component {
         this.setState({
           itemToAdd: "",
         });
+        this._retrieve();
       },
       error: () => {
-        console.log("ajax error");
+        console.error("AJAX POST error");
+      },
+    });
+  }
+
+  _retrieve() {
+    $.ajax({
+      url: "/list",
+      method: "GET",
+      success: (data) => {
+        this.setState({
+          list: data,
+        });
+      },
+      error: () => {
+        console.error("AJAX GET error");
       },
     });
   }

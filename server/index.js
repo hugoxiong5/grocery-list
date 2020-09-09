@@ -13,28 +13,27 @@ app.listen(port, () => {
 });
 
 app.get("/list", (req, res) => {
-  db.query("SELECT * FROM list", function (error, results, fields) {
+  db.query("SELECT * FROM list", function (error, results) {
     if (error) {
       console.log(error);
+      res.status(400).send();
       return;
+    } else {
+      res.send(results);
     }
-    console.log("results:", results);
-    console.log("fields: ", fields);
   });
 });
 
 app.post("/list", (req, res) => {
   db.query(`INSERT INTO list (item) values ('${req.body.data}')`, function (
     error,
-    results,
-    fields
+    results
   ) {
     if (error) {
       console.log(error);
-      return;
+      res.status(400).send();
+    } else {
+      res.status(201).send();
     }
-    console.log("results:", results);
-    console.log("fields: ", fields);
   });
-  res.send("Working!");
 });
