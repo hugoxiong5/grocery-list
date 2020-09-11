@@ -15,3 +15,8 @@ connection.connect(function(err) {
 });
 
 module.exports.connection = connection;
+
+// return new Promise((resolve, reject) => {
+//   resolve();
+//   reject();
+// }
