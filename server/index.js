@@ -25,7 +25,7 @@ app.get("/list", (req, res) => {
 });
 
 app.post("/list", (req, res) => {
-  db.query(`INSERT INTO list (item) values ('${req.body.data}')`, function (
+  db.query(`INSERT INTO list (item) VALUES ('${req.body.data}')`, function (
     error,
     results
   ) {
@@ -37,3 +37,46 @@ app.post("/list", (req, res) => {
     }
   });
 });
+
+app.post("/sublist", (req, res) => {
+  db.query(
+    `INSERT INTO sublist (item, list) VALUES ('${req.body.item}', ${req.body.listID})`,
+    function (error, results) {
+      if (error) {
+        console.log(error);
+        res.status(400).send();
+      } else {
+        console.log(results);
+        res.status(201).send();
+      }
+    }
+  );
+});
+
+// app.post("/sublist", (req, res) => {
+//   db.query(
+//     `SELECT list.id FROM list WHERE list.item='${req.body.list}'`,
+//     function (error, results) {
+//       if (error) {
+//         console.log(error);
+//         res.status(400).send();
+//       } else {
+//         console.log(results[0]);
+//         // res.send(results[0]);
+//         const listID = results[0].id;
+//         db.query(
+//           `INSERT INTO sublist (item, list) VALUES ('${req.body.item}', ${listID})`,
+//           function (error, results) {
+//             if (error) {
+//               console.log(error);
+//               res.status(400).send();
+//             } else {
+//               console.log(results);
+//               res.status(201).send();
+//             }
+//           }
+//         );
+//       }
+//     }
+//   );
+// });

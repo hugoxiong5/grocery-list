@@ -4,28 +4,30 @@ CREATE DATABASE grocery_app;
 
 USE grocery_app;
 
--- CREATE TABLE list (
---   id INTEGER(5) AUTO_INCREMENT PRIMARY KEY,
---   name VARCHAR(255) NOT NULL
--- );
+CREATE TABLE list (
+  id INTEGER(5) AUTO_INCREMENT PRIMARY KEY,
+  item VARCHAR(255) NOT NULL
+);
 
--- -- CREATE TABLE list2 (
--- --   id INTEGER(5) AUTO_INCREMENT NOT NULL,
--- --   name VARCHAR(255) NOT NULL,
--- --   PRIMARY KEY (id)
--- -- );
+CREATE TABLE sublist (
+  id INTEGER(5) AUTO_INCREMENT PRIMARY KEY,
+  item VARCHAR(255) NOT NULL,
+  list INTEGER(5),
+  FOREIGN KEY (list)
+    REFERENCES list(id)
+    -- ON DELETE CASCADE
+);
 
--- -- CREATE TABLE sublist (
--- --   id INTEGER(5) AUTO_INCREMENT PRIMARY KEY,
--- --   name VARCHAR(255) NOT NULL,
--- --   list_id INTEGER(5),
--- --   FOREIGN KEY (list_id)
--- --     REFERENCES list(id)
--- -- )
+INSERT INTO list (item) VALUES ('milk');
+INSERT INTO list (item) VALUES ('eggs');
+INSERT INTO list (item) VALUES ('bread');
 
--- INSERT INTO list (name) VALUES ('milk');
--- INSERT INTO list (name) VALUES ('eggs');
--- INSERT INTO list (name) VALUES ('bread');
+INSERT INTO sublist (item, list) VALUES ('skim', 1);
+INSERT INTO sublist (item, list) VALUES ('organic', 2);
+INSERT INTO sublist (item, list) VALUES ('cage-free', 2);
+INSERT INTO sublist (item, list) VALUES ('sourdough', 3);
+INSERT INTO sublist (item, list) VALUES ('french', 3);
+INSERT INTO sublist (item, list) VALUES ('wheat', 3);
 
 -- CREATE TABLE list3 (
 --   id INTEGER,
